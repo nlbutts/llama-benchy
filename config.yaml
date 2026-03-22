@@ -1,0 +1,22 @@
+model_cache: ~/.cache/llama.cpp
+
+llama_bench:
+  flash_attn: 1
+  threads: 8
+  batch_size: 2048
+  ubatch_size: 512
+  n_gpu_layers: 99
+  repetitions: 1
+  no_warmup: false
+
+depths:
+  - 0
+  - 4096
+  - 16384
+  - 32768
+  - 65535
+  - 130000
+
+excluded_patterns:
+  - mmproj
+  - moe
