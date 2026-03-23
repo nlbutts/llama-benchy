@@ -128,6 +128,9 @@ def run_benchmark(config: dict, db_path: str):
             "generated_at": datetime.now(timezone.utc).isoformat(),
         }
 
+    # Index existing benchmarks by model_path for deduplication
+    existing = {b["model_path"]: i for i, b in enumerate(db_data["benchmarks"]) if "model_path" in b}
+
     for model in models:
         model_name = Path(model).stem
         print(f"\nBenchmarking: {model_name}")
@@ -156,8 +159,13 @@ def run_benchmark(config: dict, db_path: str):
                         "avg_ts": row["avg_ts"],
                         "stddev_ts": row["stddev_ts"],
                     })
-                db_data["benchmarks"].append(model_entry)
-                print(f"    -> got {len(rows)} result rows")
+                if first["model_path"] in existing:
+                    db_data["benchmarks"][existing[first["model_path"]]] = model_entry
+                    print(f"    -> updated {len(rows)} result rows (replaced existing)")
+                else:
+                    db_data["benchmarks"].append(model_entry)
+                    existing[first["model_path"]] = len(db_data["benchmarks"]) - 1
+                    print(f"    -> got {len(rows)} result rows")
             else:
                 print(f"    -> no results")
         except subprocess.CalledProcessError as e:
@@ -186,7 +194,7 @@ def generate_graphs(db_paths: list[str], output_dir: str):
         benchmarks = db_data.get("benchmarks", [])
         for b in benchmarks:
             path_val = b.get("model_path", "Unknown")
-            model_name = Path(path_val).name if path_val != "Unknown" else b.get("model_name", "Unknown")
+            model_name = Path(path_val).stem if path_val != "Unknown" else b.get("model_name", "Unknown")
             
             all_data.setdefault(model_name, {"pp": {}, "tg": {}})
             
