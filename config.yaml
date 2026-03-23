@@ -1,4 +1,4 @@
-model_cache: ~/.cache/llama.cpp
+model_cache: /opt/bigdata1/llama.cpp
 
 llama_bench:
   flash_attn: 1
@@ -20,3 +20,6 @@ depths:
 excluded_patterns:
   - mmproj
   - moe
+  - LiquidAI
+  - ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4
+  - unsloth_Nemotron-3-Nano-30B-A3B-GGUF_Nemotron-3-Nano-30B-A3B-UD-Q4_K_XL

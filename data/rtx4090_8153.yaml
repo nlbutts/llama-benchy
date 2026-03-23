@@ -1,0 +1,478 @@
+benchmarks:
+- model_name: LiquidAI_LFM2.5-1.2B-Instruct-GGUF_LFM2.5-1.2B-Instruct-Q4_K_M
+  model_path: /opt/bigdata1/llama.cpp/LiquidAI_LFM2.5-1.2B-Instruct-GGUF_LFM2.5-1.2B-Instruct-Q4_K_M.gguf
+  model_size: 728509440
+  n_params: 1170340608
+  cpu_info: AMD Ryzen Threadripper PRO 7985WX 64-Cores
+  gpu_info: NVIDIA GeForce RTX 4090
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 45289.730881
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 752.645179
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 44284.554905
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 720.378119
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 32669.535588
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 637.157865
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 24226.976104
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 553.684827
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 16053.148463
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 439.313359
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 9980.751769
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 312.694223
+    stddev_ts: 0.0
+- model_name: LiquidAI_LFM2.5-VL-1.6B-GGUF_LFM2.5-VL-1.6B-BF16
+  model_path: /opt/bigdata1/llama.cpp/LiquidAI_LFM2.5-VL-1.6B-GGUF_LFM2.5-VL-1.6B-BF16.gguf
+  model_size: 2340940800
+  n_params: 1170340608
+  cpu_info: AMD Ryzen Threadripper PRO 7985WX 64-Cores
+  gpu_info: NVIDIA GeForce RTX 4090
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 30121.672732
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 339.690838
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 40015.324619
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 333.175479
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 30675.159052
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 314.685761
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 23097.651276
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 292.542986
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 15489.345327
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 257.325493
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 9707.727992
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 207.824561
+    stddev_ts: 0.0
+- model_name: ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4
+  model_path: /opt/bigdata1/llama.cpp/ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4.gguf
+  model_size: 12096558336
+  n_params: 20914757184
+  cpu_info: AMD Ryzen Threadripper PRO 7985WX 64-Cores
+  gpu_info: NVIDIA GeForce RTX 4090
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 9325.514157
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 257.323013
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 9277.533295
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 245.293058
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 7599.925212
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 221.79487
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 6431.813518
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 201.248543
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 4842.549424
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 170.752977
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 3245.929085
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 131.470858
+    stddev_ts: 0.0
+- model_name: unsloth_Nemotron-3-Nano-30B-A3B-GGUF_Nemotron-3-Nano-30B-A3B-UD-Q4_K_XL
+  model_path: /opt/bigdata1/llama.cpp/unsloth_Nemotron-3-Nano-30B-A3B-GGUF_Nemotron-3-Nano-30B-A3B-UD-Q4_K_XL.gguf
+  model_size: 22826051328
+  n_params: 31577940288
+  cpu_info: AMD Ryzen Threadripper PRO 7985WX 64-Cores
+  gpu_info: NVIDIA GeForce RTX 4090
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 7206.140893
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 220.260281
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 7198.198212
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 217.792894
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 6718.412175
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 211.363907
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 6061.563943
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 206.599604
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 5042.064606
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 195.769209
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 3957.58731
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 177.286477
+    stddev_ts: 0.0
+- model_name: unsloth_Qwen3.5-27B-GGUF_Qwen3.5-27B-UD-Q4_K_XL
+  model_path: /opt/bigdata1/llama.cpp/unsloth_Qwen3.5-27B-GGUF_Qwen3.5-27B-UD-Q4_K_XL.gguf
+  model_size: 17610131456
+  n_params: 26895998464
+  cpu_info: AMD Ryzen Threadripper PRO 7985WX 64-Cores
+  gpu_info: NVIDIA GeForce RTX 4090
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 2049.894406
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 41.334312
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 2517.703475
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 40.869974
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 2264.06221
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 39.267907
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 2025.297573
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 37.550895
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 1668.590603
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 34.528584
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 100000
+    avg_ts: 1410.067515
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 100000
+    avg_ts: 31.838728
+    stddev_ts: 0.0
+- model_name: unsloth_Qwen3.5-35B-A3B-GGUF_Qwen3.5-35B-A3B-Q4_K_M
+  model_path: /opt/bigdata1/llama.cpp/unsloth_Qwen3.5-35B-A3B-GGUF_Qwen3.5-35B-A3B-Q4_K_M.gguf
+  model_size: 22005033472
+  n_params: 34660610688
+  cpu_info: AMD Ryzen Threadripper PRO 7985WX 64-Cores
+  gpu_info: NVIDIA GeForce RTX 4090
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 5446.310695
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 139.5183
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 5252.167217
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 138.306714
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 4790.931515
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 129.508763
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 4350.193647
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 123.725192
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 3724.569348
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 112.82181
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 100000
+    avg_ts: 3211.165906
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 100000
+    avg_ts: 103.297261
+    stddev_ts: 0.0
+- model_name: unsloth_Qwen3.5-9B-GGUF_Qwen3.5-9B-UD-Q4_K_XL
+  model_path: /opt/bigdata1/llama.cpp/unsloth_Qwen3.5-9B-GGUF_Qwen3.5-9B-UD-Q4_K_XL.gguf
+  model_size: 5955127296
+  n_params: 8953803264
+  cpu_info: AMD Ryzen Threadripper PRO 7985WX 64-Cores
+  gpu_info: NVIDIA GeForce RTX 4090
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 5724.825783
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 116.972736
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 7893.239861
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 115.484414
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 7065.423531
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 109.95912
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 6203.403594
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 103.196366
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 5086.248772
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 92.090335
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 100000
+    avg_ts: 4300.232526
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 100000
+    avg_ts: 82.664284
+    stddev_ts: 0.0
+generated_at: '2026-03-23T19:31:42.733105+00:00'
