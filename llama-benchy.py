@@ -128,9 +128,6 @@ def run_benchmark(config: dict, db_path: str):
             "generated_at": datetime.now(timezone.utc).isoformat(),
         }
 
-    # Index existing benchmarks by model_path for deduplication
-    existing = {b["model_path"]: i for i, b in enumerate(db_data["benchmarks"]) if "model_path" in b}
-
     for model in models:
         model_name = Path(model).stem
         print(f"\nBenchmarking: {model_name}")
@@ -142,7 +139,7 @@ def run_benchmark(config: dict, db_path: str):
             if rows:
                 first = rows[0]
                 model_entry = {
-                    "model_name": first["model_name"],
+                    "model_name": Path(first["model_path"]).stem,
                     "model_path": first["model_path"],
                     "model_size": first["model_size"],
                     "n_params": first["n_params"],
@@ -159,13 +156,8 @@ def run_benchmark(config: dict, db_path: str):
                         "avg_ts": row["avg_ts"],
                         "stddev_ts": row["stddev_ts"],
                     })
-                if first["model_path"] in existing:
-                    db_data["benchmarks"][existing[first["model_path"]]] = model_entry
-                    print(f"    -> updated {len(rows)} result rows (replaced existing)")
-                else:
-                    db_data["benchmarks"].append(model_entry)
-                    existing[first["model_path"]] = len(db_data["benchmarks"]) - 1
-                    print(f"    -> got {len(rows)} result rows")
+                db_data["benchmarks"].append(model_entry)
+                print(f"    -> got {len(rows)} result rows")
             else:
                 print(f"    -> no results")
         except subprocess.CalledProcessError as e:
@@ -186,7 +178,7 @@ def generate_graphs(db_paths: list[str], output_dir: str):
         if not os.path.exists(path):
             print(f"Warning: {path} not found", file=sys.stderr)
             continue
-        
+
         db_label = Path(path).stem
         with open(path, "r") as f:
             db_data = yaml.safe_load(f)
@@ -195,16 +187,16 @@ def generate_graphs(db_paths: list[str], output_dir: str):
         for b in benchmarks:
             path_val = b.get("model_path", "Unknown")
             model_name = Path(path_val).stem if path_val != "Unknown" else b.get("model_name", "Unknown")
-            
+
             all_data.setdefault(model_name, {"pp": {}, "tg": {}})
-            
+
             rows = []
             if "results" in b:
                 rows = b["results"]
             else:
                 # Backward compatibility for old flat format
                 rows = [b]
-                
+
             for r in rows:
                 if r.get("n_prompt") == 512 and r.get("n_gen") == 0:
                     all_data[model_name]["pp"].setdefault(db_label, []).append((r["depth"], r["avg_ts"], r["stddev_ts"]))
@@ -229,15 +221,15 @@ def generate_graphs(db_paths: list[str], output_dir: str):
             # Union of all depths for this model/mode
             all_depths = sorted(list(set(d for rows in pp_series.values() for d, _, _ in rows)))
             depth_to_idx = {d: i for i, d in enumerate(all_depths)}
-            
+
             for i, (db_label, rows) in enumerate(sorted(pp_series.items())):
                 rows.sort(key=lambda x: x[0])
                 x_vals = [depth_to_idx[r[0]] for r in rows]
                 ts = [r[1] for r in rows]
                 std = [r[2] for r in rows]
-                ax1.errorbar(x_vals, ts, yerr=std, fmt=f'-{markers[i % len(markers)]}', 
+                ax1.errorbar(x_vals, ts, yerr=std, fmt=f'-{markers[i % len(markers)]}',
                              label=db_label, capsize=5, lw=2, markersize=6)
-            
+
             ax1.set_xticks(range(len(all_depths)))
             ax1.set_xticklabels([str(d) for d in all_depths])
             ax1.set_xlabel("Depth")
@@ -255,15 +247,15 @@ def generate_graphs(db_paths: list[str], output_dir: str):
         if tg_series:
             all_depths = sorted(list(set(d for rows in tg_series.values() for d, _, _ in rows)))
             depth_to_idx = {d: i for i, d in enumerate(all_depths)}
-            
+
             for i, (db_label, rows) in enumerate(sorted(tg_series.items())):
                 rows.sort(key=lambda x: x[0])
                 x_vals = [depth_to_idx[r[0]] for r in rows]
                 ts = [r[1] for r in rows]
                 std = [r[2] for r in rows]
-                ax2.errorbar(x_vals, ts, yerr=std, fmt=f'-{markers[i % len(markers)]}', 
+                ax2.errorbar(x_vals, ts, yerr=std, fmt=f'-{markers[i % len(markers)]}',
                              label=db_label, capsize=5, lw=2, markersize=6)
-            
+
             ax2.set_xticks(range(len(all_depths)))
             ax2.set_xticklabels([str(d) for d in all_depths])
             ax2.set_xlabel("Depth")
