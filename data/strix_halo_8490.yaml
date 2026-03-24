@@ -1,0 +1,478 @@
+benchmarks:
+- model_name: LiquidAI_LFM2.5-1.2B-Instruct-GGUF_LFM2.5-1.2B-Instruct-Q8_0
+  model_path: /home/halo/.cache/llama.cpp/LiquidAI_LFM2.5-1.2B-Instruct-GGUF_LFM2.5-1.2B-Instruct-Q8_0.gguf
+  model_size: 1243868160
+  n_params: 1170340608
+  cpu_info: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+  gpu_info: AMD Radeon Graphics (RADV GFX1151)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 6602.344529
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 161.230497
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 5529.068163
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 154.928481
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 3430.970259
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 138.049463
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 2090.292
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 120.773429
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 1078.404809
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 98.229714
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 389.694057
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 69.905526
+    stddev_ts: 0.0
+- model_name: ggml-org_gpt-oss-120b-GGUF_gpt-oss-120b-mxfp4-00001-of-00003
+  model_path: /home/halo/.cache/llama.cpp/ggml-org_gpt-oss-120b-GGUF_gpt-oss-120b-mxfp4-00001-of-00003.gguf
+  model_size: 63374323968
+  n_params: 116829156672
+  cpu_info: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+  gpu_info: AMD Radeon Graphics (RADV GFX1151)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 536.562774
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 52.656229
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 529.469842
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 50.490726
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 387.521075
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 45.782482
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 261.834075
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 40.573728
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 114.51571
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 33.215302
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 32.996338
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 24.316443
+    stddev_ts: 0.0
+- model_name: ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4
+  model_path: /home/halo/.cache/llama.cpp/ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4.gguf
+  model_size: 12096558336
+  n_params: 20914757184
+  cpu_info: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+  gpu_info: AMD Radeon Graphics (RADV GFX1151)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 1371.195924
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 77.657271
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 1223.633275
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 74.253566
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 786.4385
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 66.727207
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 464.93039
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 58.108228
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 158.216123
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 46.87693
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 57.758451
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 34.862934
+    stddev_ts: 0.0
+- model_name: unsloth_GLM-4.7-Flash-GGUF_GLM-4.7-Flash-UD-Q4_K_XL
+  model_path: /home/halo/.cache/llama.cpp/unsloth_GLM-4.7-Flash-GGUF_GLM-4.7-Flash-UD-Q4_K_XL.gguf
+  model_size: 17510693376
+  n_params: 29943393920
+  cpu_info: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+  gpu_info: AMD Radeon Graphics (RADV GFX1151)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 971.0795
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 73.887315
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 492.412522
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 62.939787
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 192.141395
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 42.444079
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 100.660966
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 30.084097
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 54.957768
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 19.364846
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 29.205543
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 9.91037
+    stddev_ts: 0.0
+- model_name: unsloth_Qwen3.5-0.8B-GGUF_Qwen3.5-0.8B-BF16
+  model_path: /home/halo/.cache/llama.cpp/unsloth_Qwen3.5-0.8B-GGUF_Qwen3.5-0.8B-BF16.gguf
+  model_size: 1505783040
+  n_params: 752393024
+  cpu_info: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+  gpu_info: AMD Radeon Graphics (RADV GFX1151)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 2446.855049
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 96.837256
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 2110.413234
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 93.846398
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 2308.074895
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 82.395549
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 1983.566539
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 76.094314
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 1427.424184
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 66.378271
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 794.321234
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 53.450455
+    stddev_ts: 0.0
+- model_name: unsloth_Qwen3.5-122B-A10B-GGUF_UD-Q4_K_XL_Qwen3.5-122B-A10B-UD-Q4_K_XL-00001-of-00003
+  model_path: /home/halo/.cache/llama.cpp/unsloth_Qwen3.5-122B-A10B-GGUF_UD-Q4_K_XL_Qwen3.5-122B-A10B-UD-Q4_K_XL-00001-of-00003.gguf
+  model_size: 77018996736
+  n_params: 122111526912
+  cpu_info: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+  gpu_info: AMD Radeon Graphics (RADV GFX1151)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 283.330014
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 22.631141
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 279.866102
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 21.752888
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 252.498114
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 21.593847
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 217.486204
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 20.770433
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 155.855133
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 19.261366
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 71.777162
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 16.489929
+    stddev_ts: 0.0
+- model_name: unsloth_Qwen3.5-35B-A3B-GGUF_Qwen3.5-35B-A3B-UD-Q4_K_XL
+  model_path: /home/halo/.cache/llama.cpp/unsloth_Qwen3.5-35B-A3B-GGUF_Qwen3.5-35B-A3B-UD-Q4_K_XL.gguf
+  model_size: 22230960640
+  n_params: 34660610688
+  cpu_info: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+  gpu_info: AMD Radeon Graphics (RADV GFX1151)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 1031.528422
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 61.58501
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 956.069363
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 58.966885
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 801.89442
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 54.32826
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 659.529715
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 50.105509
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 451.245177
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 43.440799
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 130000
+    avg_ts: 245.416835
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 130000
+    avg_ts: 33.178598
+    stddev_ts: 0.0
+generated_at: '2026-03-23T22:22:20.531760+00:00'
