@@ -23,12 +23,23 @@ def expand_path(path: str) -> str:
     return os.path.expanduser(os.path.expandvars(path))
 
 
+def get_model_name(path: str) -> str:
+    """Extract a descriptive model name, including repo if it's a HF layout."""
+    parts = Path(path).parts
+    for part in parts:
+        if part.startswith("models--"):
+            repo = part.replace("models--", "").replace("--", "/")
+            return f"{repo}/{Path(path).stem}"
+    return Path(path).stem
+
+
 def find_models(cache_dir: str, excluded_patterns: list[str]) -> list[str]:
     cache_dir = expand_path(cache_dir)
-    patterns = ["*.gguf", "*.GGUF"]
+    # Recursively find models to support HuggingFace cache structure
+    patterns = ["**/*.gguf", "**/*.GGUF"]
     models = []
     for pat in patterns:
-        for f in glob(os.path.join(cache_dir, pat)):
+        for f in glob(os.path.join(cache_dir, pat), recursive=True):
             skip = False
             for ex in excluded_patterns:
                 if ex.lower() in f.lower():
@@ -36,7 +47,7 @@ def find_models(cache_dir: str, excluded_patterns: list[str]) -> list[str]:
                     break
             if not skip:
                 models.append(f)
-    return sorted(models)
+    return sorted(list(set(models)))
 
 
 LONG_TO_SHORT = {
@@ -85,7 +96,7 @@ def parse_csv_result(csv_text: str, model_path: str, depth: int) -> list[dict]:
             results.append(
                 {
                     "model_path": row.get("model_filename", model_path),
-                    "model_name": row.get("model_type", Path(model_path).stem),
+                    "model_name": get_model_name(model_path),
                     "model_size": int(row.get("model_size", 0)),
                     "n_params": int(row.get("model_n_params", 0)),
                     "cpu_info": row.get("cpu_info", ""),
@@ -105,7 +116,7 @@ def parse_csv_result(csv_text: str, model_path: str, depth: int) -> list[dict]:
 
 
 def run_benchmark(config: dict, db_path: str):
-    cache_dir = config.get("model_cache", "~/.cache/llama.cpp")
+    cache_dir = config.get("model_cache", "~/.cache/huggingface/hub")
     excluded = config.get("excluded_patterns", [])
     depths = config.get("depths", [0, 4096, 16384])
 
@@ -129,8 +140,8 @@ def run_benchmark(config: dict, db_path: str):
         }
 
     for model in models:
-        model_name = Path(model).stem
-        print(f"\nBenchmarking: {model_name}")
+        model_display_name = get_model_name(model)
+        print(f"\nBenchmarking: {model_display_name}")
         cmd = build_llama_bench_cmd(model, config, depths)
         print(f"  Command: {' '.join(cmd)}")
         try:
@@ -139,7 +150,7 @@ def run_benchmark(config: dict, db_path: str):
             if rows:
                 first = rows[0]
                 model_entry = {
-                    "model_name": Path(first["model_path"]).stem,
+                    "model_name": get_model_name(first["model_path"]),
                     "model_path": first["model_path"],
                     "model_size": first["model_size"],
                     "n_params": first["n_params"],

@@ -1,4 +1,4 @@
-model_cache: /opt/bigdata1/llama.cpp
+model_cache: ~/.cache/huggingface/hub
 
 llama_bench:
   flash_attn: 1
@@ -15,11 +15,9 @@ depths:
   - 16384
   - 32768
   - 65535
-  - 130000
 
 excluded_patterns:
   - mmproj
   - moe
-  - LiquidAI
-  - ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4
-  - unsloth_Nemotron-3-Nano-30B-A3B-GGUF_Nemotron-3-Nano-30B-A3B-UD-Q4_K_XL
+  - Heretic
+  - Liquid
