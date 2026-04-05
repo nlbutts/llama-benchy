@@ -61,9 +61,19 @@ LONG_TO_SHORT = {
 }
 
 
-def build_llama_bench_cmd(model_path: str, config: dict, depths: list[int]) -> list[str]:
+def build_llama_bench_cmd(
+    model_path: str, config: dict, depths: list[int]
+) -> list[str]:
     llm = config.get("llama_bench", {})
-    cmd = ["llama-bench", "-m", model_path, "-d", ",".join(map(str, depths)), "-o", "csv"]
+    cmd = [
+        "llama-bench",
+        "-m",
+        model_path,
+        "-d",
+        ",".join(map(str, depths)),
+        "-o",
+        "csv",
+    ]
     for k, v in llm.items():
         flag = LONG_TO_SHORT.get(k, f"-{k}")
         if isinstance(v, bool):
@@ -145,6 +155,9 @@ def run_benchmark(config: dict, db_path: str):
         cmd = build_llama_bench_cmd(model, config, depths)
         print(f"  Command: {' '.join(cmd)}")
         try:
+            # Find the absolute path of the llama-bench executable
+            llama_bench_path = subprocess.getoutput("which llama-bench")
+            print(f"  llama-bench path: {llama_bench_path}")
             result = subprocess.run(cmd, capture_output=True, text=True, check=True)
             rows = parse_csv_result(result.stdout, model, 0)
             if rows:
@@ -157,16 +170,18 @@ def run_benchmark(config: dict, db_path: str):
                     "cpu_info": first["cpu_info"],
                     "gpu_info": first["gpu_info"],
                     "backend": first["backend"],
-                    "results": []
+                    "results": [],
                 }
                 for row in rows:
-                    model_entry["results"].append({
-                        "n_prompt": row["n_prompt"],
-                        "n_gen": row["n_gen"],
-                        "depth": row["depth"],
-                        "avg_ts": row["avg_ts"],
-                        "stddev_ts": row["stddev_ts"],
-                    })
+                    model_entry["results"].append(
+                        {
+                            "n_prompt": row["n_prompt"],
+                            "n_gen": row["n_gen"],
+                            "depth": row["depth"],
+                            "avg_ts": row["avg_ts"],
+                            "stddev_ts": row["stddev_ts"],
+                        }
+                    )
                 db_data["benchmarks"].append(model_entry)
                 print(f"    -> got {len(rows)} result rows")
             else:
@@ -197,7 +212,11 @@ def generate_graphs(db_paths: list[str], output_dir: str):
         benchmarks = db_data.get("benchmarks", [])
         for b in benchmarks:
             path_val = b.get("model_path", "Unknown")
-            model_name = Path(path_val).stem if path_val != "Unknown" else b.get("model_name", "Unknown")
+            model_name = (
+                Path(path_val).stem
+                if path_val != "Unknown"
+                else b.get("model_name", "Unknown")
+            )
 
             all_data.setdefault(model_name, {"pp": {}, "tg": {}})
 
@@ -210,9 +229,13 @@ def generate_graphs(db_paths: list[str], output_dir: str):
 
             for r in rows:
                 if r.get("n_prompt") == 512 and r.get("n_gen") == 0:
-                    all_data[model_name]["pp"].setdefault(db_label, []).append((r["depth"], r["avg_ts"], r["stddev_ts"]))
+                    all_data[model_name]["pp"].setdefault(db_label, []).append(
+                        (r["depth"], r["avg_ts"], r["stddev_ts"])
+                    )
                 elif r.get("n_prompt") == 0 and r.get("n_gen") == 128:
-                    all_data[model_name]["tg"].setdefault(db_label, []).append((r["depth"], r["avg_ts"], r["stddev_ts"]))
+                    all_data[model_name]["tg"].setdefault(db_label, []).append(
+                        (r["depth"], r["avg_ts"], r["stddev_ts"])
+                    )
 
     if not all_data:
         print("No benchmark data found", file=sys.stderr)
@@ -220,17 +243,19 @@ def generate_graphs(db_paths: list[str], output_dir: str):
 
     os.makedirs(output_dir, exist_ok=True)
 
-    markers = ['o', 's', '^', 'v', '<', '>', 'D', 'p', '*', 'h']
+    markers = ["o", "s", "^", "v", "<", ">", "D", "p", "*", "h"]
 
     for model_name, modes in sorted(all_data.items()):
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-        fig.suptitle(model_name, fontsize=11, fontweight='bold')
+        fig.suptitle(model_name, fontsize=11, fontweight="bold")
 
         # Mode PP
         pp_series = modes["pp"]
         if pp_series:
             # Union of all depths for this model/mode
-            all_depths = sorted(list(set(d for rows in pp_series.values() for d, _, _ in rows)))
+            all_depths = sorted(
+                list(set(d for rows in pp_series.values() for d, _, _ in rows))
+            )
             depth_to_idx = {d: i for i, d in enumerate(all_depths)}
 
             for i, (db_label, rows) in enumerate(sorted(pp_series.items())):
@@ -238,25 +263,42 @@ def generate_graphs(db_paths: list[str], output_dir: str):
                 x_vals = [depth_to_idx[r[0]] for r in rows]
                 ts = [r[1] for r in rows]
                 std = [r[2] for r in rows]
-                ax1.errorbar(x_vals, ts, yerr=std, fmt=f'-{markers[i % len(markers)]}',
-                             label=db_label, capsize=5, lw=2, markersize=6)
+                ax1.errorbar(
+                    x_vals,
+                    ts,
+                    yerr=std,
+                    fmt=f"-{markers[i % len(markers)]}",
+                    label=db_label,
+                    capsize=5,
+                    lw=2,
+                    markersize=6,
+                )
 
             ax1.set_xticks(range(len(all_depths)))
             ax1.set_xticklabels([str(d) for d in all_depths])
             ax1.set_xlabel("Depth")
             ax1.set_ylabel("Tokens/sec")
             ax1.set_title("Prompt Processing (pp512)")
-            ax1.grid(True, linestyle='--', alpha=0.6)
+            ax1.grid(True, linestyle="--", alpha=0.6)
             if len(pp_series) > 1:
                 ax1.legend(fontsize=8)
         else:
-            ax1.text(0.5, 0.5, "No pp512 data", ha="center", va="center", transform=ax1.transAxes)
+            ax1.text(
+                0.5,
+                0.5,
+                "No pp512 data",
+                ha="center",
+                va="center",
+                transform=ax1.transAxes,
+            )
             ax1.set_title("Prompt Processing (pp512)")
 
         # Mode TG
         tg_series = modes["tg"]
         if tg_series:
-            all_depths = sorted(list(set(d for rows in tg_series.values() for d, _, _ in rows)))
+            all_depths = sorted(
+                list(set(d for rows in tg_series.values() for d, _, _ in rows))
+            )
             depth_to_idx = {d: i for i, d in enumerate(all_depths)}
 
             for i, (db_label, rows) in enumerate(sorted(tg_series.items())):
@@ -264,19 +306,34 @@ def generate_graphs(db_paths: list[str], output_dir: str):
                 x_vals = [depth_to_idx[r[0]] for r in rows]
                 ts = [r[1] for r in rows]
                 std = [r[2] for r in rows]
-                ax2.errorbar(x_vals, ts, yerr=std, fmt=f'-{markers[i % len(markers)]}',
-                             label=db_label, capsize=5, lw=2, markersize=6)
+                ax2.errorbar(
+                    x_vals,
+                    ts,
+                    yerr=std,
+                    fmt=f"-{markers[i % len(markers)]}",
+                    label=db_label,
+                    capsize=5,
+                    lw=2,
+                    markersize=6,
+                )
 
             ax2.set_xticks(range(len(all_depths)))
             ax2.set_xticklabels([str(d) for d in all_depths])
             ax2.set_xlabel("Depth")
             ax2.set_ylabel("Tokens/sec")
             ax2.set_title("Token Generation (tg128)")
-            ax2.grid(True, linestyle='--', alpha=0.6)
+            ax2.grid(True, linestyle="--", alpha=0.6)
             if len(tg_series) > 1:
                 ax2.legend(fontsize=8)
         else:
-            ax2.text(0.5, 0.5, "No tg128 data", ha="center", va="center", transform=ax2.transAxes)
+            ax2.text(
+                0.5,
+                0.5,
+                "No tg128 data",
+                ha="center",
+                va="center",
+                transform=ax2.transAxes,
+            )
             ax2.set_title("Token Generation (tg128)")
 
         safe_name = model_name.replace("/", "_").replace(" ", "_")
@@ -289,7 +346,9 @@ def generate_graphs(db_paths: list[str], output_dir: str):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="llama-benchy - Benchmark and graph llama.cpp models")
+    parser = argparse.ArgumentParser(
+        description="llama-benchy - Benchmark and graph llama.cpp models"
+    )
     parser.add_argument(
         "mode",
         choices=["benchmark", "graph"],

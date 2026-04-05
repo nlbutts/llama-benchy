@@ -1,0 +1,234 @@
+benchmarks:
+- model_name: ggml-org/gpt-oss-20b-GGUF/gpt-oss-20b-mxfp4
+  model_path: /home/nlbutts/.cache/huggingface/hub/models--ggml-org--gpt-oss-20b-GGUF/snapshots/e1dc459feff949ff451ce107337a2026daa80df8/gpt-oss-20b-mxfp4.gguf
+  model_size: 12096558336
+  n_params: 20914757184
+  cpu_info: AMD Ryzen 7 5800X3D 8-Core Processor
+  gpu_info: AMD Radeon AI PRO R9700
+  backend: ROCm
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 4884.140927
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 135.345722
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 3658.842363
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 131.299986
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 2191.426554
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 120.57568
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 968.553231
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 107.290234
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 703.41371
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 89.406296
+    stddev_ts: 0.0
+- model_name: unsloth/GLM-4.7-Flash-GGUF/GLM-4.7-Flash-UD-Q4_K_XL
+  model_path: /home/nlbutts/.cache/huggingface/hub/models--unsloth--GLM-4.7-Flash-GGUF/snapshots/0d32489ecb9db6d2a4fc93bd27ef01519f95474d/GLM-4.7-Flash-UD-Q4_K_XL.gguf
+  model_size: 17510693376
+  n_params: 29943393920
+  cpu_info: AMD Ryzen 7 5800X3D 8-Core Processor
+  gpu_info: AMD Radeon AI PRO R9700
+  backend: ROCm
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 2583.262942
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 70.432093
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 940.8264
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 65.827
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 327.485311
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 53.64609
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 175.891624
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 42.995776
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 91.006474
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 30.443996
+    stddev_ts: 0.0
+- model_name: unsloth/Qwen3.5-27B-GGUF/Qwen3.5-27B-UD-Q4_K_XL
+  model_path: /home/nlbutts/.cache/huggingface/hub/models--unsloth--Qwen3.5-27B-GGUF/snapshots/3221f178a6b842d04f1fb42f1c413534adcc0a6a/Qwen3.5-27B-UD-Q4_K_XL.gguf
+  model_size: 17610131456
+  n_params: 26895998464
+  cpu_info: AMD Ryzen 7 5800X3D 8-Core Processor
+  gpu_info: AMD Radeon AI PRO R9700
+  backend: ROCm
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 1093.653263
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 25.516332
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 934.187029
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 25.192947
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 678.573419
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 24.328507
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 495.796011
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 23.329864
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 325.907935
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 21.571069
+    stddev_ts: 0.0
+- model_name: unsloth/Qwen3.5-35B-A3B-GGUF/Qwen3.5-35B-A3B-UD-Q4_K_XL
+  model_path: /home/nlbutts/.cache/huggingface/hub/models--unsloth--Qwen3.5-35B-A3B-GGUF/snapshots/bc014a17be43adabd7066b7a86075ff935c6a4e2/Qwen3.5-35B-A3B-UD-Q4_K_XL.gguf
+  model_size: 22230960640
+  n_params: 34660610688
+  cpu_info: AMD Ryzen 7 5800X3D 8-Core Processor
+  gpu_info: AMD Radeon AI PRO R9700
+  backend: ROCm
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 1780.305824
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 65.738866
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 2229.553457
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 66.413788
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 1674.718695
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 64.350269
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 1177.132357
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 61.569223
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65535
+    avg_ts: 761.557005
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65535
+    avg_ts: 57.510333
+    stddev_ts: 0.0
+generated_at: '2026-03-30T00:55:52.899378+00:00'

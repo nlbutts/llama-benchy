@@ -21,3 +21,4 @@ excluded_patterns:
   - moe
   - Heretic
   - Liquid
+  - GLM
