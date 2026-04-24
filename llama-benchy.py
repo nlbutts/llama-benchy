@@ -197,6 +197,11 @@ def run_benchmark(config: dict, db_path: str):
 
 
 def generate_graphs(db_paths: list[str], output_dir: str):
+    """Graph mode: compare different YAML files (benchmark runs) per model.
+
+    For each model that appears in multiple YAML files, creates a graph
+    with one line per YAML file, showing how performance changed across runs.
+    """
     # all_data[model_name][mode][db_label] = [(depth, ts, std), ...]
     all_data: dict[str, dict[str, dict[str, list[tuple]]]] = {}
 
@@ -224,7 +229,6 @@ def generate_graphs(db_paths: list[str], output_dir: str):
             if "results" in b:
                 rows = b["results"]
             else:
-                # Backward compatibility for old flat format
                 rows = [b]
 
             for r in rows:
@@ -242,99 +246,43 @@ def generate_graphs(db_paths: list[str], output_dir: str):
         sys.exit(1)
 
     os.makedirs(output_dir, exist_ok=True)
-
     markers = ["o", "s", "^", "v", "<", ">", "D", "p", "*", "h"]
 
     for model_name, modes in sorted(all_data.items()):
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
         fig.suptitle(model_name, fontsize=11, fontweight="bold")
 
-        # Mode PP
-        pp_series = modes["pp"]
-        if pp_series:
-            # Union of all depths for this model/mode
-            all_depths = sorted(
-                list(set(d for rows in pp_series.values() for d, _, _ in rows))
-            )
-            depth_to_idx = {d: i for i, d in enumerate(all_depths)}
+        for ax, mode_key in [(ax1, "pp"), (ax2, "tg")]:
+            series = modes[mode_key]
+            title = "Prompt Processing (pp512)" if mode_key == "pp" else "Token Generation (tg128)"
+            ax.set_title(title)
 
-            for i, (db_label, rows) in enumerate(sorted(pp_series.items())):
-                rows.sort(key=lambda x: x[0])
-                x_vals = [depth_to_idx[r[0]] for r in rows]
-                ts = [r[1] for r in rows]
-                std = [r[2] for r in rows]
-                ax1.errorbar(
-                    x_vals,
-                    ts,
-                    yerr=std,
-                    fmt=f"-{markers[i % len(markers)]}",
-                    label=db_label,
-                    capsize=5,
-                    lw=2,
-                    markersize=6,
+            if series:
+                all_depths = sorted(
+                    list(set(d for rows in series.values() for d, _, _ in rows))
                 )
+                depth_to_idx = {d: i for i, d in enumerate(all_depths)}
 
-            ax1.set_xticks(range(len(all_depths)))
-            ax1.set_xticklabels([str(d) for d in all_depths])
-            ax1.set_xlabel("Depth")
-            ax1.set_ylabel("Tokens/sec")
-            ax1.set_title("Prompt Processing (pp512)")
-            ax1.grid(True, linestyle="--", alpha=0.6)
-            if len(pp_series) > 1:
-                ax1.legend(fontsize=8)
-        else:
-            ax1.text(
-                0.5,
-                0.5,
-                "No pp512 data",
-                ha="center",
-                va="center",
-                transform=ax1.transAxes,
-            )
-            ax1.set_title("Prompt Processing (pp512)")
+                for i, (db_label, rows) in enumerate(sorted(series.items())):
+                    rows.sort(key=lambda x: x[0])
+                    x_vals = [depth_to_idx[r[0]] for r in rows]
+                    ts = [r[1] for r in rows]
+                    std = [r[2] for r in rows]
+                    ax.errorbar(
+                        x_vals, ts, yerr=std,
+                        fmt=f"-{markers[i % len(markers)]}",
+                        label=db_label, capsize=5, lw=2, markersize=6,
+                    )
 
-        # Mode TG
-        tg_series = modes["tg"]
-        if tg_series:
-            all_depths = sorted(
-                list(set(d for rows in tg_series.values() for d, _, _ in rows))
-            )
-            depth_to_idx = {d: i for i, d in enumerate(all_depths)}
-
-            for i, (db_label, rows) in enumerate(sorted(tg_series.items())):
-                rows.sort(key=lambda x: x[0])
-                x_vals = [depth_to_idx[r[0]] for r in rows]
-                ts = [r[1] for r in rows]
-                std = [r[2] for r in rows]
-                ax2.errorbar(
-                    x_vals,
-                    ts,
-                    yerr=std,
-                    fmt=f"-{markers[i % len(markers)]}",
-                    label=db_label,
-                    capsize=5,
-                    lw=2,
-                    markersize=6,
-                )
-
-            ax2.set_xticks(range(len(all_depths)))
-            ax2.set_xticklabels([str(d) for d in all_depths])
-            ax2.set_xlabel("Depth")
-            ax2.set_ylabel("Tokens/sec")
-            ax2.set_title("Token Generation (tg128)")
-            ax2.grid(True, linestyle="--", alpha=0.6)
-            if len(tg_series) > 1:
-                ax2.legend(fontsize=8)
-        else:
-            ax2.text(
-                0.5,
-                0.5,
-                "No tg128 data",
-                ha="center",
-                va="center",
-                transform=ax2.transAxes,
-            )
-            ax2.set_title("Token Generation (tg128)")
+                ax.set_xticks(range(len(all_depths)))
+                ax.set_xticklabels([str(d) for d in all_depths])
+                ax.set_xlabel("Depth")
+                ax.set_ylabel("Tokens/sec")
+                ax.grid(True, linestyle="--", alpha=0.6)
+                if len(series) > 1:
+                    ax.legend(fontsize=8)
+            else:
+                ax.text(0.5, 0.5, f"No {mode_key} data", ha="center", va="center", transform=ax.transAxes)
 
         safe_name = model_name.replace("/", "_").replace(" ", "_")
         fig_path = os.path.join(output_dir, f"{safe_name}.png")
@@ -345,14 +293,97 @@ def generate_graphs(db_paths: list[str], output_dir: str):
         print(f"Saved: {fig_path}")
 
 
+def compare_models(db_path: str, output_dir: str):
+    """Compare mode: single YAML file, plot all models in one graph.
+
+    Creates a single graph with two subplots (pp and tg), where each line
+    represents a different model from the same benchmark run.
+    """
+    if not os.path.exists(db_path):
+        print(f"Error: {db_path} not found", file=sys.stderr)
+        sys.exit(1)
+
+    with open(db_path, "r") as f:
+        db_data = yaml.safe_load(f)
+
+    benchmarks = db_data.get("benchmarks", [])
+    if not benchmarks:
+        print("No benchmark data found", file=sys.stderr)
+        sys.exit(1)
+
+    # model_display_name[mode] = [(depth, ts, std), ...]
+    model_data: dict[str, dict[str, list[tuple]]] = {}
+
+    for b in benchmarks:
+        model_name = b.get("model_name", "Unknown")
+        model_data.setdefault(model_name, {"pp": [], "tg": []})
+
+        rows = b.get("results", [b])
+        for r in rows:
+            if r.get("n_prompt") == 512 and r.get("n_gen") == 0:
+                model_data[model_name]["pp"].append(
+                    (r["depth"], r["avg_ts"], r["stddev_ts"])
+                )
+            elif r.get("n_prompt") == 0 and r.get("n_gen") == 128:
+                model_data[model_name]["tg"].append(
+                    (r["depth"], r["avg_ts"], r["stddev_ts"])
+                )
+
+    os.makedirs(output_dir, exist_ok=True)
+    markers = ["o", "s", "^", "v", "<", ">", "D", "p", "*", "h"]
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
+    run_label = Path(db_path).stem
+    fig.suptitle(f"Model Comparison: {run_label}", fontsize=13, fontweight="bold")
+
+    for ax, mode_key in [(ax1, "pp"), (ax2, "tg")]:
+        title = "Prompt Processing (pp512)" if mode_key == "pp" else "Token Generation (tg128)"
+        ax.set_title(title)
+
+        all_depths = sorted(
+            list(set(d for name in model_data for d, _, _ in model_data[name][mode_key]))
+        )
+        depth_to_idx = {d: i for i, d in enumerate(all_depths)}
+
+        for i, (model_name, modes) in enumerate(sorted(model_data.items())):
+            rows = sorted(modes[mode_key], key=lambda x: x[0])
+            if not rows:
+                continue
+
+            x_vals = [depth_to_idx[r[0]] for r in rows]
+            ts = [r[1] for r in rows]
+            std = [r[2] for r in rows]
+
+            short_name = model_name.split("/")[-1] if "/" in model_name else model_name
+            ax.errorbar(
+                x_vals, ts, yerr=std,
+                fmt=f"-{markers[i % len(markers)]}",
+                label=short_name, capsize=5, lw=2, markersize=6,
+            )
+
+        ax.set_xticks(range(len(all_depths)))
+        ax.set_xticklabels([str(d) for d in all_depths], rotation=45, ha="right")
+        ax.set_xlabel("Depth")
+        ax.set_ylabel("Tokens/sec")
+        ax.grid(True, linestyle="--", alpha=0.6)
+        ax.legend(fontsize=8, loc="upper right")
+
+    fig_path = os.path.join(output_dir, f"{run_label}_compare.png")
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.85)
+    plt.savefig(fig_path, dpi=150)
+    plt.close()
+    print(f"Saved: {fig_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="llama-benchy - Benchmark and graph llama.cpp models"
     )
     parser.add_argument(
         "mode",
-        choices=["benchmark", "graph"],
-        help="Mode: benchmark (run llama-bench) or graph (generate charts from database)",
+        choices=["benchmark", "graph", "compare"],
+        help="Mode: benchmark (run llama-bench), graph (compare runs per model), or compare (all models in one run)",
     )
     parser.add_argument(
         "--config",
@@ -363,7 +394,7 @@ def main():
         "--db",
         default=["benchmarks.yaml"],
         nargs="+",
-        help="Path to benchmark database(s) (default: benchmarks.yaml)",
+        help="Path to benchmark database YAML file(s) (default: benchmarks.yaml)",
     )
     parser.add_argument(
         "--output",
@@ -372,12 +403,13 @@ def main():
     )
     args = parser.parse_args()
 
-    config = load_config(args.config)
-
     if args.mode == "benchmark":
+        config = load_config(args.config)
         run_benchmark(config, args.db[0])
     elif args.mode == "graph":
         generate_graphs(args.db, args.output)
+    elif args.mode == "compare":
+        compare_models(args.db[0], args.output)
 
 
 if __name__ == "__main__":
