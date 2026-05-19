@@ -14,7 +14,6 @@ depths:
   - 4096
   - 16384
   - 32768
-  - 65535
 
 excluded_patterns:
   - mmproj

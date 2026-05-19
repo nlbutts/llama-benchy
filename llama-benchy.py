@@ -50,6 +50,48 @@ def find_models(cache_dir: str, excluded_patterns: list[str]) -> list[str]:
     return sorted(list(set(models)))
 
 
+def select_models(models: list[str]) -> list[str]:
+    """Interactive model selection: toggle models in/out of benchmark set."""
+    if not models:
+        print("No models found", file=sys.stderr)
+        return []
+
+    selected = set()
+    model_map = {i: m for i, m in enumerate(models)}
+
+    while True:
+        print("\n--- Model Selection ---")
+        print("Type number to toggle, 'd' or Enter when done:")
+        for i, model in enumerate(models):
+            display_name = get_model_name(model)
+            status = "[x]" if i in selected else "[ ]"
+            print(f"  {status} {i}: {display_name}")
+        print(f"\nSelected: {len(selected)} model(s)")
+
+        try:
+            user_input = input("\n> ").strip()
+        except EOFError:
+            print("\nDone (EOF)")
+            break
+
+        if user_input == "" or user_input.lower() == "d":
+            break
+
+        try:
+            idx = int(user_input)
+            if idx in model_map:
+                if idx in selected:
+                    selected.remove(idx)
+                else:
+                    selected.add(idx)
+            else:
+                print(f"Invalid index: {idx}")
+        except ValueError:
+            print(f"Invalid input: enter a number or 'd'")
+
+    return [models[i] for i in sorted(selected)]
+
+
 LONG_TO_SHORT = {
     "batch_size": "-b",
     "ubatch_size": "-ub",
@@ -136,6 +178,12 @@ def run_benchmark(config: dict, db_path: str):
         sys.exit(1)
 
     print(f"Found {len(models)} models")
+    models = select_models(models)
+    if not models:
+        print("No models selected, exiting")
+        sys.exit(0)
+
+    print(f"Selected {len(models)} model(s) for benchmarking")
 
     db_data = {"benchmarks": [], "generated_at": datetime.now(timezone.utc).isoformat()}
     if os.path.exists(db_path):
