@@ -1,0 +1,60 @@
+benchmarks:
+- model_name: unsloth/Qwen3.6-35B-A3B-MTP-GGUF/Qwen3.6-35B-A3B-UD-Q8_K_XL
+  model_path: /home/nick/.cache/huggingface/hub/models--unsloth--Qwen3.6-35B-A3B-MTP-GGUF/snapshots/b8efbbece76dc9103a6a45b7ed95b26c3932fc5f/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf
+  model_size: 39088456192
+  n_params: 35505251456
+  cpu_info: CPU
+  gpu_info: NVIDIA GB10
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 1882.182514
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 56.394522
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 1819.99504
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 54.955489
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 1690.725844
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 51.127289
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 1585.392633
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 47.241058
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65536
+    avg_ts: 1398.123375
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65536
+    avg_ts: 40.446807
+    stddev_ts: 0.0
+generated_at: '2026-05-28T17:44:14.895932+00:00'

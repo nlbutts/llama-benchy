@@ -1,0 +1,60 @@
+benchmarks:
+- model_name: unsloth/Qwen3.6-35B-A3B-MTP-GGUF/Qwen3.6-35B-A3B-UD-Q8_K_XL
+  model_path: /home/halo/.cache/huggingface/hub/models--unsloth--Qwen3.6-35B-A3B-MTP-GGUF/snapshots/b8efbbece76dc9103a6a45b7ed95b26c3932fc5f/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf
+  model_size: 39088456192
+  n_params: 35505251456
+  cpu_info: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+  gpu_info: AMD Radeon Graphics (RADV GFX1151)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 995.445588
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 48.412782
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 940.689615
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 47.176205
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 789.168705
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 44.540659
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 655.694018
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 41.652788
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 65536
+    avg_ts: 444.915184
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 65536
+    avg_ts: 37.05381
+    stddev_ts: 0.0
+generated_at: '2026-05-28T18:47:59.602791+00:00'
