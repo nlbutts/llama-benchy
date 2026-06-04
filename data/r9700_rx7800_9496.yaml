@@ -1,0 +1,98 @@
+benchmarks:
+- model_name: unsloth/Qwen3.6-35B-A3B-MTP-GGUF/Qwen3.6-35B-A3B-Q8_0
+  model_path: /home/nlbutts/.cache/huggingface/hub/models--unsloth--Qwen3.6-35B-A3B-MTP-GGUF/snapshots/5bc3e238d916f48a861bac2f8a1990a0e9b7e98d/Qwen3.6-35B-A3B-Q8_0.gguf
+  model_size: 37790106112
+  n_params: 35505251456
+  cpu_info: AMD Ryzen 7 5800X3D 8-Core Processor
+  gpu_info: AMD Radeon AI PRO R9700 (RADV GFX1201), AMD Radeon RX 7800 XT (RADV NAVI32)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 1329.931044
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 73.647635
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 1648.014803
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 72.227448
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 1436.978857
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 68.625643
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 1191.691925
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 63.781743
+    stddev_ts: 0.0
+- model_name: unsloth/Qwen3.6-35B-A3B-MTP-GGUF/Qwen3.6-35B-A3B-UD-Q4_K_XL
+  model_path: /home/nlbutts/.cache/huggingface/hub/models--unsloth--Qwen3.6-35B-A3B-MTP-GGUF/snapshots/5bc3e238d916f48a861bac2f8a1990a0e9b7e98d/Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf
+  model_size: 22842671616
+  n_params: 35505251456
+  cpu_info: AMD Ryzen 7 5800X3D 8-Core Processor
+  gpu_info: AMD Radeon AI PRO R9700 (RADV GFX1201), AMD Radeon RX 7800 XT (RADV NAVI32)
+  backend: Vulkan
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 1809.563291
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 74.738896
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 1626.99974
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 72.333793
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 1407.481373
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 70.324606
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 1205.657069
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 67.674543
+    stddev_ts: 0.0
+generated_at: '2026-06-04T01:47:23.539250+00:00'

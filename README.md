@@ -13,6 +13,34 @@
 - **Multi-DB Comparison**: Compare benchmark results from different systems (e.g., ROCm vs CUDA) by passing multiple database files to the graphing command.
 - **Smart Filtering**: Exclude specific patterns (like multimodal `mmproj` or specific model architectures) automatically.
 
+## GPU Isolation on Multi-GPU Systems
+
+When running benchmarks on a system with multiple GPUs, isolate `llama-bench` to a single GPU by prefixing the command with the appropriate environment variable:
+
+**Nvidia (CUDA):**
+```bash
+CUDA_VISIBLE_DEVICES=0 python llama-benchy.py benchmark
+```
+
+**AMD (ROCm):**
+```bash
+HIP_VISIBLE_DEVICES=0 python llama-benchy.py benchmark
+# or
+ROCR_VISIBLE_DEVICES=0 python llama-benchy.py benchmark
+```
+
+**Vulkan:**
+Vulkan does not have a standard device-visibility environment variable. Instead, use vendor-specific variables depending on your GPU:
+```bash
+# Nvidia GPU via Vulkan
+CUDA_VISIBLE_DEVICES=0 python llama-benchy.py benchmark
+
+# AMD GPU via Vulkan
+HIP_VISIBLE_DEVICES=0 python llama-benchy.py benchmark
+```
+
+To isolate each GPU for separate benchmark runs, repeat with `CUDA_VISIBLE_DEVICES=0`, `CUDA_VISIBLE_DEVICES=1`, etc.
+
 ## Requirements
 
 - Python 3.x
