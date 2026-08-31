@@ -1,0 +1,50 @@
+benchmarks:
+- model_name: unsloth/Qwen3.8-Flash-Next-GGUF/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003
+  model_path: /home/nlbutts/.cache/huggingface/hub/models--unsloth--Qwen3.8-Flash-Next-GGUF/snapshots/c8b5954a88c2775c546b92593eda40ea041d3176/UD-IQ4_XS/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf
+  model_size: 93671559680
+  n_params: 176943899520
+  cpu_info: AMD Ryzen Threadripper 3960X 24-Core Processor
+  gpu_info: NVIDIA RTX PRO 5000 72GB Blackwell
+  backend: CUDA
+  results:
+  - n_prompt: 512
+    n_gen: 0
+    depth: 0
+    avg_ts: 360.600207
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 0
+    avg_ts: 80.670214
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 4096
+    avg_ts: 488.320246
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 4096
+    avg_ts: 79.175653
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 16384
+    avg_ts: 496.22347
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 16384
+    avg_ts: 70.984586
+    stddev_ts: 0.0
+  - n_prompt: 512
+    n_gen: 0
+    depth: 32768
+    avg_ts: 504.193165
+    stddev_ts: 0.0
+  - n_prompt: 0
+    n_gen: 128
+    depth: 32768
+    avg_ts: 63.444946
+    stddev_ts: 0.0
+generated_at: '2026-08-31T21:27:57.771839+00:00'

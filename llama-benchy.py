@@ -3,6 +3,7 @@
 import argparse
 import csv
 import os
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -33,6 +34,15 @@ def get_model_name(path: str) -> str:
     return Path(path).stem
 
 
+SPLIT_SHARD_RE = re.compile(r"-(\d+)-of-\d+\.gguf$", re.IGNORECASE)
+
+
+def is_extra_shard(path: str) -> bool:
+    """True for non-first shards of a split GGUF (only shard 00001 is loadable)."""
+    m = SPLIT_SHARD_RE.search(path)
+    return bool(m) and int(m.group(1)) != 1
+
+
 def find_models(cache_dir: str, excluded_patterns: list[str]) -> list[str]:
     cache_dir = expand_path(cache_dir)
     # Recursively find models to support HuggingFace cache structure
@@ -40,6 +50,8 @@ def find_models(cache_dir: str, excluded_patterns: list[str]) -> list[str]:
     models = []
     for pat in patterns:
         for f in glob(os.path.join(cache_dir, pat), recursive=True):
+            if is_extra_shard(f):
+                continue
             skip = False
             for ex in excluded_patterns:
                 if ex.lower() in f.lower():
